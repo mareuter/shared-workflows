@@ -1,0 +1,39 @@
+name: Publish NPM Package
+
+on:
+  workflow_call:
+
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
+jobs:
+  npm-publish:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - name: Install project dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Publish to NPM
+        # Uses trusted publisher methodology
+        # Script is shortcut for
+        # npm publish --registry https://registry.npmjs.org/ --access public --ignore-scripts
+        run: pnpm publish:npm
