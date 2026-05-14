@@ -39,8 +39,8 @@ jobs:
       - name: Install Ubuntu Dependencies
         if: matrix.platform == 'ubuntu-22.04'
         run: |
-          sudo apt-get upgrade
-          sudo apt-get install -y libwebkitgtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+          sudo apt update
+          sudo apt install -y libwebkitgtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
       - run: pnpm install --frozen-lockfile
 
