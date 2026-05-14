@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  ci:
+  pnpm-turborepo-ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,8 +13,6 @@ jobs:
           fetch-depth: 2
 
       - uses: pnpm/action-setup@v6
-        with:
-          version: 10
 
       - uses: actions/setup-node@v6
         with:
