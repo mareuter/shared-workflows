@@ -46,7 +46,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - uses: tauri-apps/tauri-action@v1
+      - uses: tauri-apps/tauri-action@61337b436e85a75347fec553393c9e2be16a0d85
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
