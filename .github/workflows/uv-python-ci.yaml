@@ -2,6 +2,10 @@ name: Python CI
 
 on:
   workflow_call:
+    inputs:
+      python-version:
+        required: true
+        type: string
 
 jobs:
   lint:
@@ -13,7 +17,7 @@ jobs:
 
       - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8
         with:
-          python-version: ${{ matrix.python }}
+          python-version: ${{ inputs.python-version }}
 
       - name: Run linters
         run: uv run --only-group=tox tox run -e lint
@@ -27,7 +31,7 @@ jobs:
 
       - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8
         with:
-          python-version: ${{ matrix.python }}
+          python-version: ${{ inputs.python-version }}
 
       - name: Run tests
         run: uv run --only-group=tox tox run -e py,coverage-report
