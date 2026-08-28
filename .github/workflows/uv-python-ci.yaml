@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8
+        with:
+          python-version: ${{ matrix.python }}
 
       - name: Run linters
         run: uv run --only-group=tox tox run -e lint
@@ -24,6 +26,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8
+        with:
+          python-version: ${{ matrix.python }}
 
       - name: Run tests
         run: uv run --only-group=tox tox run -e py,coverage-report
