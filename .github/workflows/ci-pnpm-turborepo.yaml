@@ -2,6 +2,11 @@ name: CI with PNPM and Turborepo
 
 on:
   workflow_call:
+    inputs:
+      use-playwright:
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   pnpm-turborepo-ci:
@@ -27,6 +32,10 @@ jobs:
           restore-keys: turbo-
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        if: ${{ inputs.use-playwright }}
+        run: pnpm exec playwright install --with-deps
 
       - name: Run on affected packages
         run: pnpm build test lint format --filter=[origin/main]
