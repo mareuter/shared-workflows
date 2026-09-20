@@ -37,5 +37,11 @@ jobs:
         if: ${{ inputs.use-playwright }}
         run: pnpm exec playwright install --with-deps
 
-      - name: Run on affected packages
-        run: pnpm build test lint format --filter=[origin/main]
+      - name: Run linting and formatting
+        run: pnpm lint format --filter=[origin/main]
+
+      - name: Build components and dependencies
+        run: pnpm build --filter=[origin/main]
+
+      - name: Run tests
+        run: pnpm test --filter=[origin/main]
