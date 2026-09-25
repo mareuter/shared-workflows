@@ -43,5 +43,8 @@ jobs:
       - name: Build components and dependencies
         run: pnpm build --filter=[origin/main]
 
-      - name: Run tests
-        run: pnpm test --filter=[origin/main]
+      - name: Run unit tests
+        run: pnpm test:unit --filter=[origin/main]
+
+      - name: Run end-to-end tests
+        run: pnpm test:e2e --filter=[origin/main]
