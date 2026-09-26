@@ -11,6 +11,7 @@ on:
 jobs:
   pnpm-turborepo-ci:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v7
@@ -47,4 +48,5 @@ jobs:
         run: pnpm test:unit --filter=[origin/main]
 
       - name: Run end-to-end tests
+        if: ${{ inputs.use-playwright }}
         run: pnpm test:e2e --filter=[origin/main]
