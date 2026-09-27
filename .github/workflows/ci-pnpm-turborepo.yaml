@@ -7,6 +7,10 @@ on:
         required: false
         type: boolean
         default: false
+      run-e2e:
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   pnpm-turborepo-ci:
@@ -47,6 +51,6 @@ jobs:
       - name: Run unit tests
         run: pnpm test:unit --filter=[origin/main]
 
-      - name: Run end-to-end tests
-        if: ${{ inputs.use-playwright }}
+      - name: Run Playwright end-to-end tests
+        if: ${{ inputs.use-playwright && inputs.run-e2e }}
         run: pnpm test:e2e --filter=[origin/main]
